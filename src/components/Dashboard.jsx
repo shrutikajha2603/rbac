@@ -1,90 +1,69 @@
 import React, { useState } from "react";
+import { FaMoon, FaSun } from "react-icons/fa"; // Import Moon and Sun icons
 import Navbar from "../components/Navbar";
 
 function Dashboard() {
-  const [activeTab, setActiveTab] = useState("users"); 
+  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
+
+  // Toggle between light and dark modes
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    if (isDarkMode) {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className={`min-h-screen ${isDarkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"}`}>
       <Navbar />
       <div className="p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Dashboard</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold">Dashboard</h1>
+          {/* Toggle Button with Icon */}
+          <button
+            onClick={toggleDarkMode}
+            className="bg-gray-300 text-gray-800 dark:bg-gray-700 dark:text-gray-200 p-2 rounded-full shadow hover:bg-gray-400 dark:hover:bg-gray-600 transition"
+          >
+            {isDarkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
+          </button>
+        </div>
 
+        {/* Tab Navigation */}
         <div className="flex space-x-4 border-b-2 border-gray-300 pb-2">
           <button
             className={`px-4 py-2 rounded ${
-              activeTab === "users"
-                ? "bg-blue-500 text-white"
+              isDarkMode
+                ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
                 : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
-            onClick={() => setActiveTab("users")}
           >
             Users
           </button>
           <button
             className={`px-4 py-2 rounded ${
-              activeTab === "roles"
-                ? "bg-blue-500 text-white"
+              isDarkMode
+                ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
                 : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
-            onClick={() => setActiveTab("roles")}
           >
             Roles
           </button>
           <button
             className={`px-4 py-2 rounded ${
-              activeTab === "permissions"
-                ? "bg-blue-500 text-white"
+              isDarkMode
+                ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
                 : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
-            onClick={() => setActiveTab("permissions")}
           >
             Permissions
           </button>
-        </div>
-
-        {/* Tab Content */}
-        <div className="mt-6">
-          {activeTab === "users" && <Users />}
-          {activeTab === "roles" && <Roles />}
-          {activeTab === "permissions" && <Permissions />}
         </div>
       </div>
     </div>
   );
 }
 
-// Placeholder for Users Section
-function Users() {
-  return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Manage Users</h2>
-      <p className="text-gray-600">This section allows you to view, add, edit, or delete users.</p>
-      {/* Add your Users Table or CRUD functionality here */}
-    </div>
-  );
-}
-
-// Placeholder for Roles Section
-function Roles() {
-  return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Manage Roles</h2>
-      <p className="text-gray-600">This section allows you to define and manage roles.</p>
-      {/* Add your Roles Table or CRUD functionality here */}
-    </div>
-  );
-}
-
-// Placeholder for Permissions Section
-function Permissions() {
-  return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Manage Permissions</h2>
-      <p className="text-gray-600">This section allows you to manage permissions for roles.</p>
-      {/* Add your Permissions Table or CRUD functionality here */}
-    </div>
-  );
-}
-
 export default Dashboard;
+

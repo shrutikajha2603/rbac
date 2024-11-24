@@ -1,9 +1,22 @@
 import React, { useState } from "react";
+import Navbar from "../components/Navbar";
 
 const UsersPage = () => {
   const [users, setUsers] = useState([
-    { id: 1, name: "John Doe", email: "john@example.com", role: "Admin", status: "Active" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Editor", status: "Inactive" },
+    {
+      id: 1,
+      name: "John Doe",
+      email: "john@example.com",
+      role: "Admin",
+      status: "Active",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      email: "jane@example.com",
+      role: "Editor",
+      status: "Inactive",
+    },
   ]);
 
   const [showModal, setShowModal] = useState(false);
@@ -37,58 +50,61 @@ const UsersPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Users Management</h1>
-      <button
-        onClick={handleAddUser}
-        className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 hover:bg-blue-600 transition"
-      >
-        Add User
-      </button>
+    <div>
+      <Navbar />
+      <div className="container mx-auto p-6">
+        <h1 className="text-3xl font-bold mb-6">Users Management</h1>
+        <button
+          onClick={handleAddUser}
+          className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 hover:bg-blue-600 transition"
+        >
+          Add User
+        </button>
 
-      <table className="min-w-full bg-white rounded-md shadow-md overflow-hidden">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="py-2 px-4 text-left">Name</th>
-            <th className="py-2 px-4 text-left">Email</th>
-            <th className="py-2 px-4 text-left">Role</th>
-            <th className="py-2 px-4 text-left">Status</th>
-            <th className="py-2 px-4 text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id} className="border-b">
-              <td className="py-2 px-4">{user.name}</td>
-              <td className="py-2 px-4">{user.email}</td>
-              <td className="py-2 px-4">{user.role}</td>
-              <td className="py-2 px-4">{user.status}</td>
-              <td className="py-2 px-4 text-center space-x-2">
-                <button
-                  onClick={() => handleEditUser(user)}
-                  className="bg-yellow-400 px-3 py-1 rounded hover:bg-yellow-500"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDeleteUser(user.id)}
-                  className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                >
-                  Delete
-                </button>
-              </td>
+        <table className="min-w-full bg-white rounded-md shadow-md overflow-hidden">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="py-2 px-4 text-left">Name</th>
+              <th className="py-2 px-4 text-left">Email</th>
+              <th className="py-2 px-4 text-left">Role</th>
+              <th className="py-2 px-4 text-left">Status</th>
+              <th className="py-2 px-4 text-center">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.id} className="border-b">
+                <td className="py-2 px-4">{user.name}</td>
+                <td className="py-2 px-4">{user.email}</td>
+                <td className="py-2 px-4">{user.role}</td>
+                <td className="py-2 px-4">{user.status}</td>
+                <td className="py-2 px-4 text-center space-x-2">
+                  <button
+                    onClick={() => handleEditUser(user)}
+                    className="bg-yellow-400 px-3 py-1 rounded hover:bg-yellow-500"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDeleteUser(user.id)}
+                    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-      {showModal && (
-        <UserModal
-          user={selectedUser}
-          onSave={handleSaveUser}
-          onClose={() => setShowModal(false)}
-        />
-      )}
+        {showModal && (
+          <UserModal
+            user={selectedUser}
+            onSave={handleSaveUser}
+            onClose={() => setShowModal(false)}
+          />
+        )}
+      </div>
     </div>
   );
 };
@@ -111,7 +127,9 @@ const UserModal = ({ user, onSave, onClose }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-6 rounded-md w-1/3">
-        <h2 className="text-xl font-bold mb-4">{user ? "Edit User" : "Add User"}</h2>
+        <h2 className="text-xl font-bold mb-4">
+          {user ? "Edit User" : "Add User"}
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
