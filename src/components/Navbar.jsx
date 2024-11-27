@@ -8,7 +8,7 @@ function Navbar({ isDarkMode, toggleDarkMode }) {
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <h1 className="text-xl font-bold">
-          <Link to="/dashboard" className="hover:text-yellow-300">
+          <Link to="/" className="hover:text-yellow-300">
             VRV Security
           </Link>
         </h1>
