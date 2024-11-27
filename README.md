@@ -1,70 +1,113 @@
-# Getting Started with Create React App
+# Role Based Access Control
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a Role-Based Access Control (RBAC) dashboard designed for managing users, roles, and permissions. It combines a sleek landing page with an integrated dashboard and supports a toggle for dark/light mode, making it user-friendly and visually appealing.
 
-## Available Scripts
 
-In the project directory, you can run:
+## Features
+ <ul>
+  <li>Landing & Dashboard:
+    <ul>  <li> The landing page has been merged with the dashboard, making it a one-stop solution for both showcasing features and accessing functionalities.</li>
+          <li>Quick navigation to manage users, roles, and permissions.</li> 
+    </ul> </li>
+  <li> Role-Based Access Control:
+    <ul>  <li>Tabs to manage:
+            <ol> <li>Users</li> 
+                 <li>Roles</li>
+                 <li>Permissions</li>
+            </ol> 
+          </li>
+          <li> Dark/Light Mode: <ul> <li> A reusable toggle component to switch between light and dark themes. </li>
+             <li>Theme persistence using localStorage.</li> </ul>
+          </li> 
+        <li> Responsive Design: Fully responsive for mobile, tablet, and desktop devices. </li> </ul> </li> </ul> 
 
-### `npm start`
+## Technology Stack
+<ul> <li> Frontend:
+        <ol> <li> React </li>
+             <li> Tailwind CSS </li>
+             <li> React Router DOM (for routing) </li>
+             <li> React Icons (for dark/light mode icons) </li>
+        </ol> </li>
+     <li> Tooling:
+       <ol><li> Node.js & npm (for dependency management) </li>
+           <li> Vite (optional for better development experience) </li>
+       </ol> </li> </ul>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Folder Structure:
+![image](https://github.com/user-attachments/assets/0c4d6ce8-2c0f-4766-b372-09babbfc5959)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation and Setup
+### Prerequisites
+Ensure you have the following installed on your system:
+1. Node.js (v16 or later)
+2. npm (v8 or later)
 
-### `npm test`
+### Steps to Run
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Clone the project:
+```bash
+  git clone https://github.com/shrutikajha2603/rbac.git
+```
+#### Install Dependencies:
+```bash
+  npm install
+```
 
-### `npm run build`
+#### Start the Development Server:
+``` bash
+  npm start
+```
+The app will be available at http://localhost:3000.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Build for Production: To create an optimized build for deployment:
+``` bash
+  npm run build
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Usage
+### Navigation
+- Start directly at the Dashboard, which acts as both the landing page and the control center for managing users, roles, and permissions.
+- Use the tabs within the dashboard to switch between the Users, Roles, and Permissions management sections.
+### Dark/Light Mode
+- Toggle between dark and light themes using the button in the navbar. The chosen theme will persist across pages and reloads.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Components
+### Dashboard.jsx
+The merged component that acts as both the landing page and the dashboard. It contains:
+- A hero section for welcoming users and introducing features.
+- Navigation tabs for managing users, roles, and permissions.
+### ThemeToggle.jsx
+- A reusable component for toggling between light and dark themes using icons and localStorage.
 
-### `npm run eject`
+### Navbar.jsx
+- The navigation bar that connects all sections and includes the theme toggle button.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Tailwind CSS Configuration
+ - Custom Colors: Used Tailwind's default gray, blue, yellow, and purple colors for styling.
+ - Responsive Utilities: Classes like md: and lg: are used to ensure responsiveness.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Future Improvements
+- API Integration: Connect the dashboard with a backend API to fetch and manage users, roles, and permissions dynamically.
+- Authentication: Add login and role-based authentication.
+- Enhanced Features:
+  <ul> <li>Pagination for large datasets.</li>
+       <li>Search and filter functionality for users, roles, and permissions. </li> </ul>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Contributing
+### Fork the repository.
+##### Create a feature branch:
+```bash
+  git checkout -b feature-name
+```
+#### Commit your changes:
+```bash
+  git commit -m "Add feature-name"
+```
+#### Push to your fork and submit a pull request.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## **Bonus**
+Don't forget to star the repository and share your feedback!✨
 
-## Learn More
+## Authors
+- [@shrutikajha2603](https://github.com/shrutikajha2603)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
