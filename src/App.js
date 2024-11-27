@@ -5,7 +5,6 @@ import UsersPage from "./pages/UsersPage";
 import RolesPage from "./pages/RolesPage";
 import PermissionsPage from "./pages/PermissionsPage";
 import Dashboard from "./components/Dashboard";
-import LandingPage from "./components/LandingPage";
 
 function App() {
   return (
@@ -16,8 +15,6 @@ function App() {
 
         {/* Define Routes */}
         <Routes>
-          {/* Landing Page */}
-          <Route path="/" element={<LandingPage />} />
 
           {/* Dashboard */}
           <Route path="/dashboard" element={<Dashboard />} />
