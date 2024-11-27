@@ -46,41 +46,55 @@ const RolesPage = () => {
     setShowModal(false);
   };
 
+  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
+
+  // Toggle between light and dark modes
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    if (isDarkMode) {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+  };
+
   return (
-    <div>
-      <Navbar />
+    <div className={`${isDarkMode ? "dark" : ""}`}>
+      <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       <div className="container mx-auto p-6">
         <h1 className="text-3xl font-bold mb-6">Roles Management</h1>
         <button
           onClick={handleAddRole}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 hover:bg-blue-600 transition"
+          className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 hover:bg-blue-600 transition dark:bg-blue-700 dark:hover:bg-blue-800"
         >
           Add Role
         </button>
 
-        <table className="min-w-full bg-white rounded-md shadow-md overflow-hidden">
+        <table className="min-w-full bg-white rounded-md shadow-md overflow-hidden dark:bg-gray-800">
           <thead>
-            <tr className="bg-gray-200">
-              <th className="py-2 px-4 text-left">Role Name</th>
-              <th className="py-2 px-4 text-left">Permissions</th>
-              <th className="py-2 px-4 text-center">Actions</th>
+            <tr className="bg-gray-200 dark:bg-gray-700">
+              <th className="py-2 px-4 text-left dark:text-white">Role Name</th>
+              <th className="py-2 px-4 text-left dark:text-white">Permissions</th>
+              <th className="py-2 px-4 text-center dark:text-white">Actions</th>
             </tr>
           </thead>
           <tbody>
             {roles.map((role) => (
-              <tr key={role.id} className="border-b">
-                <td className="py-2 px-4">{role.name}</td>
-                <td className="py-2 px-4">{role.permissions.join(", ")}</td>
+              <tr key={role.id} className="border-b dark:border-gray-700">
+                <td className="py-2 px-4 dark:text-gray-300">{role.name}</td>
+                <td className="py-2 px-4 dark:text-gray-300">
+                  {role.permissions.join(", ")}
+                </td>
                 <td className="py-2 px-4 text-center space-x-2">
                   <button
                     onClick={() => handleEditRole(role)}
-                    className="bg-yellow-400 px-3 py-1 rounded hover:bg-yellow-500"
+                    className="bg-yellow-400 px-3 py-1 rounded hover:bg-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDeleteRole(role.id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700"
                   >
                     Delete
                   </button>
@@ -129,7 +143,7 @@ const RoleModal = ({ role, permissions, onSave, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-md w-1/3">
+      <div className="bg-white p-6 rounded-md w-1/3 dark:bg-gray-800 dark:text-white">
         <h2 className="text-xl font-bold mb-4">{role ? "Edit Role" : "Add Role"}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -138,12 +152,12 @@ const RoleModal = ({ role, permissions, onSave, onClose }) => {
             value={formData.name}
             onChange={handleChange}
             placeholder="Role Name"
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           />
           <div className="space-y-2">
-            <h3 className="font-semibold">Permissions:</h3>
+            <h3 className="font-semibold dark:text-gray-200">Permissions:</h3>
             {permissions.map((perm) => (
-              <label key={perm} className="block">
+              <label key={perm} className="block dark:text-gray-300">
                 <input
                   type="checkbox"
                   name="permissions"
@@ -159,13 +173,13 @@ const RoleModal = ({ role, permissions, onSave, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+              className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800"
             >
               Save
             </button>

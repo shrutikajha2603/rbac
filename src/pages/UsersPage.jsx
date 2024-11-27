@@ -49,21 +49,39 @@ const UsersPage = () => {
     setShowModal(false);
   };
 
+  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
+
+  // Toggle between light and dark modes
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    if (isDarkMode) {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+  };
+
   return (
-    <div>
-      <Navbar />
+    <div className={`${isDarkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"} min-h-screen`}>
+      <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       <div className="container mx-auto p-6">
         <h1 className="text-3xl font-bold mb-6">Users Management</h1>
         <button
           onClick={handleAddUser}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 hover:bg-blue-600 transition"
+          className={`${
+            isDarkMode ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-500 hover:bg-blue-600"
+          } text-white px-4 py-2 rounded-md mb-4 transition`}
         >
           Add User
         </button>
 
-        <table className="min-w-full bg-white rounded-md shadow-md overflow-hidden">
+        <table
+          className={`min-w-full ${
+            isDarkMode ? "bg-gray-800 text-white" : "bg-white text-black"
+          } rounded-md shadow-md overflow-hidden`}
+        >
           <thead>
-            <tr className="bg-gray-200">
+            <tr className={`${isDarkMode ? "bg-gray-700" : "bg-gray-200"}`}>
               <th className="py-2 px-4 text-left">Name</th>
               <th className="py-2 px-4 text-left">Email</th>
               <th className="py-2 px-4 text-left">Role</th>
@@ -73,7 +91,7 @@ const UsersPage = () => {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.id} className="border-b">
+              <tr key={user.id} className={`${isDarkMode ? "border-gray-700" : "border-gray-300"} border-b`}>
                 <td className="py-2 px-4">{user.name}</td>
                 <td className="py-2 px-4">{user.email}</td>
                 <td className="py-2 px-4">{user.role}</td>
@@ -81,13 +99,17 @@ const UsersPage = () => {
                 <td className="py-2 px-4 text-center space-x-2">
                   <button
                     onClick={() => handleEditUser(user)}
-                    className="bg-yellow-400 px-3 py-1 rounded hover:bg-yellow-500"
+                    className={`${
+                      isDarkMode ? "bg-yellow-500 hover:bg-yellow-600" : "bg-yellow-400 hover:bg-yellow-500"
+                    } px-3 py-1 rounded`}
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDeleteUser(user.id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                    className={`${
+                      isDarkMode ? "bg-red-600 hover:bg-red-700" : "bg-red-500 hover:bg-red-600"
+                    } text-white px-3 py-1 rounded`}
                   >
                     Delete
                   </button>
@@ -102,6 +124,7 @@ const UsersPage = () => {
             user={selectedUser}
             onSave={handleSaveUser}
             onClose={() => setShowModal(false)}
+            isDarkMode={isDarkMode}
           />
         )}
       </div>
@@ -109,7 +132,7 @@ const UsersPage = () => {
   );
 };
 
-const UserModal = ({ user, onSave, onClose }) => {
+const UserModal = ({ user, onSave, onClose, isDarkMode }) => {
   const [formData, setFormData] = useState(
     user || { name: "", email: "", role: "", status: "Active" }
   );
@@ -126,7 +149,9 @@ const UserModal = ({ user, onSave, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-md w-1/3">
+      <div className={`${
+        isDarkMode ? "bg-gray-800 text-white" : "bg-white text-black"
+      } p-6 rounded-md w-1/3`}>
         <h2 className="text-xl font-bold mb-4">
           {user ? "Edit User" : "Add User"}
         </h2>
@@ -137,7 +162,9 @@ const UserModal = ({ user, onSave, onClose }) => {
             value={formData.name}
             onChange={handleChange}
             placeholder="Name"
-            className="w-full p-2 border rounded"
+            className={`w-full p-2 border rounded ${
+              isDarkMode ? "bg-gray-700 border-gray-600 text-white" : "bg-gray-100 border-gray-300"
+            }`}
           />
           <input
             type="email"
@@ -145,7 +172,9 @@ const UserModal = ({ user, onSave, onClose }) => {
             value={formData.email}
             onChange={handleChange}
             placeholder="Email"
-            className="w-full p-2 border rounded"
+            className={`w-full p-2 border rounded ${
+              isDarkMode ? "bg-gray-700 border-gray-600 text-white" : "bg-gray-100 border-gray-300"
+            }`}
           />
           <input
             type="text"
@@ -153,13 +182,17 @@ const UserModal = ({ user, onSave, onClose }) => {
             value={formData.role}
             onChange={handleChange}
             placeholder="Role"
-            className="w-full p-2 border rounded"
+            className={`w-full p-2 border rounded ${
+              isDarkMode ? "bg-gray-700 border-gray-600 text-white" : "bg-gray-100 border-gray-300"
+            }`}
           />
           <select
             name="status"
             value={formData.status}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className={`w-full p-2 border rounded ${
+              isDarkMode ? "bg-gray-700 border-gray-600 text-white" : "bg-gray-100 border-gray-300"
+            }`}
           >
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
@@ -168,13 +201,17 @@ const UserModal = ({ user, onSave, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+              className={`${
+                isDarkMode ? "bg-gray-600 hover:bg-gray-700" : "bg-gray-300 hover:bg-gray-400"
+              } px-4 py-2 rounded`}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              className={`${
+                isDarkMode ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-500 hover:bg-blue-600"
+              } text-white px-4 py-2 rounded`}
             >
               Save
             </button>
